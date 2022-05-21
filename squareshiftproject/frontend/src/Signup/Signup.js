@@ -3,13 +3,17 @@ import { FiUser } from "react-icons/fi";
 import { BiLockAlt } from "react-icons/bi";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { signupaction } from '../Actions/userloginactions'
+import Error from '../componenets/Error'
 import "./Signup.css";
 
-const Signup = ({history}) => {
+const Signup = ({ history }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [passwordShown, setpasswordShown] = useState(true);
   const [confirmpasswordShown, setconfirmpasswordShown] = useState(true);
-
+  const [error, seterror] = useState(null);
   const [user_details, setUserDetail] = useState({
     username: "",
     email:"",
@@ -17,7 +21,8 @@ const Signup = ({history}) => {
     confirmPassword:"",
   });
 
-  let handleChange = (e) => {
+    let handleChange = (e) => {
+      
     const { name, value } = e.target;
     setUserDetail((prev) => {
       return {
@@ -36,14 +41,28 @@ const Signup = ({history}) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    navigate("../");
+      e.preventDefault()
+
+      if (user_details.password !== user_details.confirmpassword) {
+          seterror("The passwords does'nt match");
+      } else {
+           dispatch(signupaction(user_details))
+           navigate("/products");
+      }
+     
+      
+
   };
 
 
-  return (
-    <form onSubmit = {handleSubmit} >
-    <div className="login_page">
+    return (
+       
+      <form onSubmit={handleSubmit} >
+          
+            <div className="login_page">
+                  {
+                    error && <Error error={error}></Error>
+                  }
       <div className="login_title">
         <h4>Register Now!</h4>
       </div>
@@ -52,14 +71,14 @@ const Signup = ({history}) => {
           <label>Username</label>
           <div className="form_input">
             <FiUser />
-            <input type="text" name="username" placeholder="Your Username" required/>
+            <input type="text" name="name" placeholder="Your Username" required  onChange={handleChange}/>
           </div>
         </div>
         <div className="single_form">
           <label>Email Address</label>
           <div className="form_input">
             <FiUser />
-            <input type="email" placeholder="Your Email Address" name="email" required/>
+                          <input type="email" placeholder="Your Email Address" name="email" required onChange={handleChange}/>
           </div>
         </div>
         <div className="single_form">
@@ -70,7 +89,7 @@ const Signup = ({history}) => {
               type={passwordShown ? "password" : "text"}
               name="password"
               placeholder="Your Password"
-              // onChange={handleChange}
+              onChange={handleChange}
               required
             />
             {passwordShown ? (
@@ -96,9 +115,9 @@ const Signup = ({history}) => {
             <BiLockAlt />
             <input
               type={confirmpasswordShown ? "password" : "text"}
-              name="confirmPassword"
+              name="confirmpassword"
               placeholder="Confirm your Password"
-              // onChange={handleChange}
+              onChange={handleChange}
               required
             />
             {confirmpasswordShown ? (
@@ -119,7 +138,7 @@ const Signup = ({history}) => {
           </div>
         </div>
         <div className="login_btn">
-          <button type="submit" onClick={()=>{history.push('/products')}} >Signup </button>
+          <button type="submit" onClick={handleSubmit} >Signup </button>
         </div>
       </div>
     </div>

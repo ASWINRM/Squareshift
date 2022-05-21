@@ -1,22 +1,28 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import "./Login.css";
 import {FiUser} from "react-icons/fi";
 import {BiLockAlt} from "react-icons/bi";
 import {AiOutlineEyeInvisible,AiOutlineEye} from "react-icons/ai"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios';
+import {loginaction} from '../Actions/userloginactions'
 
 
 const Login = () => {
 
     const navigate = useNavigate()
     const [passwordShown, setpasswordShown] = useState(true);
-
+    const userinfo = useSelector(state => state.userdetails);
+    const dispatch = useDispatch();
     const [user_details, setUserDetail] = useState({
-        username: "",
+        email: "",
         password: "",
       });
 
       
+   
+    
     let handleChange = (e) => {
         const { name, value } = e.target;
         setUserDetail((prev) => {
@@ -35,8 +41,12 @@ const Login = () => {
           navigate("/Signup")
       }
 
-    const handleSignin = () => {
+    const handleSignin = async (e) => {
+        e.preventDefault();
+        dispatch(loginaction(user_details))
         navigate("/products")
+        
+        
     }
   return (
       <form>
@@ -46,10 +56,10 @@ const Login = () => {
     </div>
     <div className='login_container'>
     <div className='single_form'>
-   <label>Username</label>
+   <label>Email</label>
    <div className='form_input'>
    <FiUser />
-       <input type="text" placeholder="Your Username"   onChange={handleChange} name="username" required/>
+       <input type="email" placeholder="Your Email"   onChange={handleChange} name="email" required/>
    </div>
    </div>
    <div className='single_form'>

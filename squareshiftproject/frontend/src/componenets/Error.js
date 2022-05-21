@@ -1,10 +1,19 @@
 import React from 'react';
 import './error.css'
-function Error(props) {
+import { useState } from 'react';
+function Error({ error }) {
+    
+    let [stateclass,setstateclass]=useState("alert")
     return (
-        <div className='error'>
-            error
-        </div>
+        <div>
+            {
+                stateclass==="alert" && <div className={stateclass}>
+                <span className="closebtn" onclick={()=>setstateclass("none")}>X</span>
+                <strong>Alert!</strong> {error}.
+                </div>
+            }
+            
+       </div>
     );
 }
 
