@@ -29,3 +29,31 @@ export const listproduct = () => async (dispatch) => {
         })
     }
 }
+
+
+export const filterproduct = (category) => async (dispatch) => {
+    try {
+        dispatch({ type: "PRODUCTS_LIST_REQUEST" })
+        console.log(category)
+        let { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`)
+        
+        if (data) {
+            console.log(data);
+            dispatch({
+            type: "PRODUCTS_LIST_SUCCESS",
+            payload: data
+        })
+        } else {
+             dispatch({
+            type: "PRODUCTS_LIST_FAIL",
+            payload: "Empty products"
+          })
+        }
+    } catch(e){
+        console.log(e);
+        dispatch({
+            type: "PRODUCTS_LIST_FAIL",
+            payload: e.response && e.response.data ? e.response.data : e.response
+        })
+    }
+}

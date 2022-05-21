@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useNavigate } from "react-router-dom";
 
 const SingleProduct = () => {
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const productList = useSelector(state => state.productreducer);
     const { loading, products, error } = productList;
      
@@ -13,16 +13,23 @@ const SingleProduct = () => {
        
        console.log(product)
        
-        dispatch({type:"CART_ADD_SUCCESS",payload: product});
+        dispatch({ type: "CART_ADD_SUCCESS", payload: product });
+        
+    }
+
+    const handleproduct = (id) => {
+      
+      navigate(`/product/${id}`);
+
     }
 
   return (
       <div className='single_grouped_products'>
       {
           products?.map((product,i) => (
-            <div key ={product.id} className='single_product'>
+            <div key ={product.id} className='single_product' >
             <div className="ssp-body">
-        <div className="ssp-img">
+        <div className="ssp-img" onClick={()=>handleproduct(product.id)}>
           <img src={product.image} alt="" />
         </div>
         <h3 className="ssp-name">{product.title}</h3>

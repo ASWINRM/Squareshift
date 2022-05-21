@@ -8,7 +8,7 @@ function Error({ error }) {
         <div>
             {
                 stateclass==="alert" && <div className={stateclass}>
-                <span className="closebtn" onclick={()=>setstateclass("none")}>X</span>
+                <span className="closebtn" onClick={()=>setstateclass("none")}>X</span>
                 <strong>Alert!</strong> {error}.
                 </div>
             }

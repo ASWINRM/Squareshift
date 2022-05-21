@@ -4,12 +4,19 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { listproduct } from "../../../Actions/productsaction";
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 const Header = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const getallproducts = (e) => {
         e.preventDefault();
         dispatch(listproduct())
      
+    }
+
+    const handlecart=(e)=>{
+        e.preventDefault();
+         navigate("/cart")
     }
 
     const userinfo = useSelector((state) => state.userloginreducer)
@@ -23,7 +30,7 @@ const Header = () => {
           <p onClick={getallproducts}>All products</p>
         </div>
         <div className="right">
-          <div className="shop-cart-btn">
+          <div className="shop-cart-btn" onClick={handlecart}>
             <AiOutlineShoppingCart />{" "}
             {/* {cart.length ? ( */}
               <span className="cart-badge">1</span>

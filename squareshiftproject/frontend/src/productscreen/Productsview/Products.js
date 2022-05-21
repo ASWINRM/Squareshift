@@ -8,10 +8,10 @@ import Header from '../Components/Header/Header';
 import "./Products.css";
 import SingleProduct from '../Components/SingleProduct';
 import ShopHeader from '../Components/ShopHeader';
-
+import { useNavigate } from "react-router-dom";
 function Products({history}) {
     const dispatch = useDispatch();
-
+   
     const productList = useSelector(state => state.productreducer);
     const { loading, products, error } = productList;
 
