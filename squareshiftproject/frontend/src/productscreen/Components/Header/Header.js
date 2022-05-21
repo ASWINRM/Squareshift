@@ -19,6 +19,11 @@ const Header = () => {
          navigate("/cart")
     }
 
+    const homepage = (e) => {
+        e.preventDefault();
+        navigate("/products")
+    }
+
     const userinfo = useSelector((state) => state.userloginreducer)
     const {name}=userinfo.userdetails
   return (
@@ -26,8 +31,8 @@ const Header = () => {
       <div className="product_header">
         <div className="left">
           <p style={{ fontSize: "20px" }}>The Shopping Store</p>
-          <p>Home</p>
-          <p onClick={getallproducts}>All products</p>
+                  <p onClick={homepage} style={{cursor: "pointer"}}>Home</p>
+          <p onClick={getallproducts} style={{cursor: "pointer"}}>All products</p>
         </div>
         <div className="right">
           <div className="shop-cart-btn" onClick={handlecart}>

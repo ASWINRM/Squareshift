@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { signupaction } from '../Actions/userloginactions'
 import Error from '../componenets/Error'
+import axios from 'axios'
 import "./Signup.css";
 
 const Signup = ({ history }) => {
@@ -40,14 +41,45 @@ const Signup = ({ history }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
       e.preventDefault()
 
       if (user_details.password !== user_details.confirmpassword) {
           seterror("The passwords does'nt match");
       } else {
-           dispatch(signupaction(user_details))
-           navigate("/products");
+            try {
+        console.log(user_details);
+        let { data } = await axios.post('http://localhost:5000/api/user/signup', { user_details })
+        
+        if (data == "This User is already found, please login!") {
+             dispatch({
+                type: "USER_LOGIN_FAILURE",
+                payload: data
+            })
+        }
+
+        
+        if (data.Status) {
+
+            console.log(data);
+            dispatch({
+                type: "USER_LOGIN_SUCCESS",
+                payload: data
+            })
+            navigate("/products");
+        } else {
+             dispatch({
+                type: "USER_LOGIN_FAILURE",
+                payload: data
+            })
+        }
+    } catch (e) {
+         dispatch({
+                type: "USER_LOGIN_FAILURE",
+                error: e
+            })
+    }
+           
       }
      
       

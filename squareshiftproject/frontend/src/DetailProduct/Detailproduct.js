@@ -1,7 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import Header from '../productscreen/Components/Header/Header';
-import ShopHeader from '../productscreen/Components/ShopHeader';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector} from 'react-redux';
 import Loader from '../componenets/Loader'
 import axios from 'axios';
 import "./detailproduct.css";
@@ -31,33 +30,50 @@ function Detailproduct({ match }) {
         dispatch({type:"CART_ADD_SUCCESS",payload: product});
     }
 
+    const cartlist = useSelector(state => state.cartreducer)
+    const {cartitems}=cartlist
     return (
         <div>
             <Header></Header>
-            <ShopHeader></ShopHeader>
+            
             {
                 loading && <Loader></Loader>
             }
             {
                 product && <div key ={product.id} className='product'>
-              <div className="productpage">
+              
                <div className="product-img">
                  <img src={product.image} alt="" />
-                    </div>
+                </div>
                     <div className="product_detail">
-                    <h3 className="product-name">{product.title}</h3>
-                        </div>
-                        <div className="product-desc">
+                        <h2 className="product-name">{product.title}</h2>
+                         <div className="product-desc">
                             <p>{ product.description}</p>
                         </div>
-                   <div className='single_product_bottom'>
-                     <div className="product-price">
-                        &#8377;{product.price}
-                      </div>
-                  <div className='add_btn'>
-                        <button onClick={()=>addtocart(product)}>Add to Cart</button>
-                   </div>
-                </div>
+                        <div className='single_product_bottom'>
+                           
+                            <div className="product-price">Price :
+                               &#8377;{product.price}
+                            </div>
+                            <div >
+                                 {
+                                      cartitems.some((c) => c.id == product.id) ? (
+                                        <button onClick={() => {
+                                             dispatch({ type: "CART_REMOVE_ITEMS", payload: product })
+                                             
+                                             }} className='add_btndetail'>Added</button>
+                                      ) : (
+                                              <button onClick={() => {
+                                                
+                                                 addtocart(product)
+                                               }} className='add_btndetail'>Add To Cart</button>
+                                        )
+                                  }
+                          
+                          </div>
+                    </div>
+                       
+                
         
               </div>
             

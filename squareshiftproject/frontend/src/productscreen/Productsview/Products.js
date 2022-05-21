@@ -8,7 +8,7 @@ import Header from '../Components/Header/Header';
 import "./Products.css";
 import SingleProduct from '../Components/SingleProduct';
 import ShopHeader from '../Components/ShopHeader';
-import { useNavigate } from "react-router-dom";
+
 function Products({history}) {
     const dispatch = useDispatch();
    
@@ -16,7 +16,8 @@ function Products({history}) {
     const { loading, products, error } = productList;
 
       const userinfo = useSelector((state) => state.userloginreducer)
-      const {userdetails}=userinfo
+    const { userdetails } = userinfo
+    
 
     useEffect(() => {
         console.log("dei machan");

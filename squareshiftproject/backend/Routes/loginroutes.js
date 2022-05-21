@@ -15,8 +15,8 @@ router.post('/login', asynchandler(async (req, res) => {
         console.log(password)
         const user=await User.findOne({email})
         if(!user){
-            res.status(404)
-            throw new Error('No user Found with this Email Id please Sign up')
+            res.status(200).send('No user Found with this Email Id please Sign up')
+           
             
         }
          
@@ -32,8 +32,8 @@ router.post('/login', asynchandler(async (req, res) => {
                 })
             }
         }else{
-           res.status(401)
-           throw new Error("Invalid username or password ")
+           res.status(200).send("Invalid username or password")
+          
         }
            
         }
@@ -50,8 +50,8 @@ router.post('/signup',asynchandler(async(req,res)=>{
         const exisitinguser=await User.findOne({name})
         if(exisitinguser){
             console.log("exisitinguser")
-            res.status(401).send("This User is already found, please login!")
-            throw  Error("This User is already found, please login!")
+            res.status(200).send("This User is already found, please login!")
+           
             
             
         }else{
