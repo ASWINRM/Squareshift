@@ -23,7 +23,7 @@ const Header = () => {
         e.preventDefault();
         navigate("/products")
     }
-
+     const cart =  useSelector((state) => state.cartreducer.cartitems)
     const userinfo = useSelector((state) => state.userloginreducer)
     const {name}=userinfo.userdetails
   return (
@@ -37,9 +37,9 @@ const Header = () => {
         <div className="right">
           <div className="shop-cart-btn" onClick={handlecart}>
             <AiOutlineShoppingCart />{" "}
-            {/* {cart.length ? ( */}
-              <span className="cart-badge">1</span>
-            {/* ) : null} */}
+             {cart.length ? ( 
+              <span className="cart-badge">{cart.length}</span>
+            ) : 0}
           </div>
 
           <FaUserCircle />

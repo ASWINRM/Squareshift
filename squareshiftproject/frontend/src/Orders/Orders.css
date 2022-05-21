@@ -1,0 +1,234 @@
+.orderSummary {
+    margin: 10px;
+}
+.order-summary-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 60px;
+    gap: 60px;
+    margin: 10px 0 20px;
+}
+
+.billing-details-box {
+    box-shadow: 0 0 5px #14141424;
+    border-radius: 5px;
+    padding: 25px;
+}
+
+
+.billing-details-box > div {
+    display: flex;
+}
+
+.billing-details-box > div > span {
+    font-weight: 500;
+    width:30%;
+    margin-top: 12px;
+}
+
+.billing-details-box > div > p > span{
+    padding-left: 20px;
+}
+
+.order-summary-boxes > div > span {
+    font-weight: 800;
+    color: #333;
+    font-size: 15px;
+   font-weight: bold;
+}
+
+.order-summary-boxes h4 span {
+    font-weight: 400;
+    color: #333;
+    font-size: 15px;
+    width: 50%;
+}
+.order-summary-boxes .box-title {
+    font-weight: 400;
+    color: red;
+    margin-bottom: 10px;
+}
+.order-summary-boxes p {
+    font-size: 15px;
+}
+.order-summary-boxes .customer-from {
+    font-weight: 400;
+    margin-top: 22px;
+}
+.delivery-details-box {
+    box-shadow: 0 0 5px #14141424;
+    border-radius: 5px;
+    padding: 25px;
+    background-color: #f8f7f975;
+}
+.delivery-details-box .box-title {
+    font-weight: 400;
+    color: #09d09c;
+    margin-bottom: 10px;
+}
+.order-summary-table-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cart-edit-btn {
+    background-color: #5e81d1;
+    padding: 7px 20px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 7px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.cart-edit-btn span {
+    font-size: 12px;
+}
+
+.orderSummaryProducts-title {
+    display: grid;
+    grid-template-columns: 300px repeat(3, 1fr) 80px;
+    background-color: #5e81d1;
+    color: white;
+    padding: 0px 25px;
+    margin-bottom: 5px;
+}
+
+.orderSummaryProducts-title h5 {
+    font-weight: 400;
+}
+
+.place-order-section {
+    display: grid;
+    grid-template-columns: 1fr 250px 1fr;
+    border-top: 1px solid #ddd;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.place-order-section button {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    background-color: #5e81d1;
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+}
+.place-order-section .total-price {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+}
+.place-order-section .total-price span {
+    color: #5e81d1;
+    margin-left: 10px;
+}
+
+.payment-option-modal-box {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    padding: 15px;
+    font-size: 18px;
+}
+.payment-option-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Payment option modal css */
+.payment-option-modal {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000b5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.payment-option-modal-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 450px;
+}
+.payment-option-modal-container h2 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 22px;
+    padding-bottom: 12px;
+    flex:1;
+}
+
+.payment-title {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.payment-option-box input[type="radio"],
+.payment-option-box label {
+    cursor: pointer;
+}
+.payment-option-modal-box input[type="number"] {
+    padding: 8px 15px;
+    font-size: 17px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+.payment-option-modal-box input[type="number"]:focus {
+    outline: 1px solid #0075ff;
+}
+
+.payment-option-modal-btn {
+    text-align: right;
+    padding-top: 10px;
+    margin-top: 15px;
+    border-top: 1px solid #e5e5e5dd;
+    display: flex;
+    justify-content: flex-end;
+}
+.payment-option-modal-btn input {
+    border: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #5e81d1;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.payment-loading-btn {
+    width: 110px;
+    height: 37px;
+    background-color: #5e81d1;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderSummary > h2 {
+    color: #5e81d1;
+}
+
+.orderSummaryProducts {
+    display: grid;
+    grid-template-columns: 300px repeat(3, 1fr) 80px;
+    padding: 10px 25px;
+    background-color: #ebe4ff91;
+    margin-bottom: 5px;
+    color: #333;
+}
+.orderSummaryProducts h5 {
+    font-weight: 500;
+}
+
