@@ -30,7 +30,7 @@ const Header = () => {
     <>
       <div className="product_header">
         <div className="left">
-          <p style={{ fontSize: "20px" }}>The Shopping Store</p>
+          <p style={{ fontSize: "20px" }}>SQUARESHIFT</p>
                   <p onClick={homepage} style={{cursor: "pointer"}}>Home</p>
           <p onClick={getallproducts} style={{cursor: "pointer"}}>All products</p>
         </div>
