@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ProductDesc from "./productDesc";
 import axios from 'axios'
+import Alert from "../../Alert/Alert";
+import { useSelector } from 'react-redux';
 const AddProduct = () => {
   const navigate = useNavigate();
 
@@ -30,9 +32,13 @@ const AddProduct = () => {
         e.preventDefault();
         navigate("/products");
     }
-
-  return (
-    <div className="add_product">
+     const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
+    return (
+        <div>
+           {
+                userdetails.isAdmin ? (
+              <div className="add_product">
       <div className="add_product_container">
         <div className="delete_head">
           <h4>Add new Product</h4>
@@ -49,6 +55,11 @@ const AddProduct = () => {
         </form>
       </div>
     </div>
+          ):(<Alert/>)
+      } 
+       </div>
+        
+    
   );
 };
 

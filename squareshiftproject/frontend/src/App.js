@@ -30,7 +30,7 @@ function App() {
       <Route path="/updateproduct" element={<UpdateProduct></UpdateProduct>}></Route>
       <Route path="/addproduct" element={<AddProduct></AddProduct>}></Route>
       <Route path="/adduser" element={<AddUser></AddUser>}></Route>
-      <Route path='/deleteuser'element={<DeleteUser></DeleteUser>}></Route>
+      <Route path="/deleteuser" element={<DeleteUser></DeleteUser>}></Route>
   </Routes>
 
    

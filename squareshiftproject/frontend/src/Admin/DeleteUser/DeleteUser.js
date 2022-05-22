@@ -4,8 +4,9 @@ import { GrClose } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
 import axios from 'axios'
-
-const DeleteUser = async() => {
+import { useSelector } from 'react-redux';
+import Alert from "../../Alert/Alert";
+const DeleteUser = () => {
     const navigate = useNavigate()
 
     const [user,setUser] = useState({
@@ -13,7 +14,7 @@ const DeleteUser = async() => {
         email:""
     })
 
-    const deleteUser =async (e) => {
+const deleteUser =async (e) => {
   e.preventDefault()
   let data = {}
   for(let i=0;i<e.target.length;i++){
@@ -28,16 +29,20 @@ const DeleteUser = async() => {
   }).then(() => {
     navigate("/products");
   });
-    }
+}
 
     const toproductpage = (e) => {
         e.preventDefault();
         navigate("/products");
     }
-  return (
-    <div className='deleteUser'>
-    <div className='delete_container'>
-    <div className="delete_head">
+      const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
+    return (
+      <div>
+           {
+          userdetails.isAdmin?( <div className='deleteUser'>
+     <div className='delete_container'>
+       <div className="delete_head">
           <h4>Delete User</h4>
           <GrClose
             style={{ borderRadius: "9999px" }}
@@ -58,7 +63,10 @@ const DeleteUser = async() => {
          </div>
         </form>
     </div>
-    </div>
+    </div>):(<Alert/>)
+      } 
+       </div>
+   
   )
 }
 

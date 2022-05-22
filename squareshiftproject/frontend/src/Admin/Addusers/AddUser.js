@@ -4,7 +4,8 @@ import { GrClose } from "react-icons/gr";
 import swal from "sweetalert";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-
+import { useSelector } from 'react-redux';
+import Alert from "../../Alert/Alert";
 const AddUser = () => {
     const navigate = useNavigate()
     const [user,setUser] = useState({
@@ -34,7 +35,14 @@ const AddUser = () => {
         e.preventDefault();
         navigate("/products");
     }
-  return (
+
+      const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
+    return (
+       <div>
+           {
+                userdetails.isAdmin ? (
+              
     <div className='add_user'>
     <div className='add_user_container'>
     <div className="delete_head">
@@ -67,6 +75,10 @@ const AddUser = () => {
         </form>
     </div>
     </div>
+          ):(<Alert/>)
+         }
+    </div>
+       
   )
 }
 

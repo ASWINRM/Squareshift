@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux'
 import Header from '../../productscreen/Components/Header/Header';
 import ShopHeader from '../../productscreen/Components/ShopHeader';
 import axios from 'axios';
-const DeleteProduct = async () => {
+
+const DeleteProduct =  () => {
     const navigate = useNavigate();
 
     const [productId,setProductId] = useState("")
@@ -34,7 +35,9 @@ const DeleteProduct = async () => {
         e.preventDefault();
         navigate("/products");
     }
-  return (
+
+    return (
+      
       <div>
           {
               (userdetails && userdetails.isAdmin) ? (

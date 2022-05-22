@@ -5,11 +5,13 @@ import { GrClose } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import axios from 'axios'
+import { useSelector } from 'react-redux';
+import Alert from "../../Alert/Alert";
 const UpdateProduct = async() => {
     const navigate = useNavigate();
-
+    
     const [productId,setProductId] = useState("")
-
+    
     const updateProduct = async(e) => {
         e.preventDefault();
         let data = {}
@@ -33,8 +35,13 @@ const UpdateProduct = async() => {
         navigate("/products");
     }
 
-  return (
-    <div className="update_product">
+      const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
+    return (
+        <div>
+           {
+                userdetails.isAdmin ? (
+              <div className="update_product">
       <div className="updateproduct_container">
         <div className="delete_head">
           <h4>Update Product</h4>
@@ -55,6 +62,11 @@ const UpdateProduct = async() => {
         </form>
       </div>
     </div>
+          ):(<Alert/>)
+      } 
+       </div>
+       
+    
   )
 }
 
