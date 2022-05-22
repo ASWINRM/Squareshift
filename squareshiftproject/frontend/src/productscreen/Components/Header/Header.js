@@ -8,6 +8,12 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+ const userlogout =  () => {
+    localStorage.removeItem('userinfo');
+    dispatch({ type: "USER_LOGOUT" })
+    document.location.href = '/'
+  }
     const getallproducts = (e) => {
         e.preventDefault();
         dispatch(listproduct())
@@ -25,25 +31,30 @@ const Header = () => {
     }
      const cart =  useSelector((state) => state.cartreducer.cartitems)
     const userinfo = useSelector((state) => state.userloginreducer)
-    const {name}=userinfo.userdetails
+    const { name } = userinfo.userdetails
+    const {userdetails}=userinfo
   return (
     <>
       <div className="product_header">
         <div className="left">
           <p style={{ fontSize: "20px" }}>SQUARESHIFT</p>
                   <p onClick={homepage} style={{cursor: "pointer"}}>Home</p>
-          <p onClick={getallproducts} style={{cursor: "pointer"}}>All products</p>
+                  <p onClick={getallproducts} style={{ cursor: "pointer" }}>All products</p>
+                  <p onClick={()=>userlogout()} style={{cursor: "pointer"}}>LOGOUT</p>
         </div>
         <div className="right">
           <div className="shop-cart-btn" onClick={handlecart}>
             <AiOutlineShoppingCart />{" "}
              {cart.length ? ( 
               <span className="cart-badge">{cart.length}</span>
-            ) : 0}
+            ) : null}
           </div>
 
-          <FaUserCircle />
-                  <p>{name}</p>
+                  <FaUserCircle />
+                  {
+                      userdetails.isAdmin?<p>Admin</p>: <p>{name}</p>
+                  }
+                 
         </div>
       </div>
       <div className="header_bottom">

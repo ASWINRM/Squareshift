@@ -95,4 +95,32 @@ router.post('/signup',asynchandler(async(req,res)=>{
         res.status(401).send(e)
     }}))
 
+
+router.get('/getusers', asynchandler(async (req, res) => {
+    
+    try {
+        let users = await User.find({isAdmin:false});
+        
+        if (users) {
+            res.status(200).send(users)
+        } else {
+            res.status(200).send("No users")
+        }
+    } catch {
+        console.log(e);
+        res.status(200).send(e);
+    }
+}))
+
+router.post('/delteuser', asynchandler(async (req, res) => {
+    const { email, name } = req.body.user
+    
+    const user = await User.deleteOne({ email: email })
+    
+    if (user) {
+        res.status(200).send("Deleted")
+    }
+}))
+
+
 module.exports = router;

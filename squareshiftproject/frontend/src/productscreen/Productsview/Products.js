@@ -8,7 +8,8 @@ import Header from '../Components/Header/Header';
 import "./Products.css";
 import SingleProduct from '../Components/SingleProduct';
 import ShopHeader from '../Components/ShopHeader';
-
+import Buttons from '../../Admin/Buttons/Buttons'
+import Alert from '../../Alert/Alert'
 function Products({history}) {
     const dispatch = useDispatch();
    
@@ -37,11 +38,17 @@ function Products({history}) {
                          <Header />
                         <ShopHeader />
                         {
-                          loading?<Loader></Loader>:error?<Error></Error>:<div><SingleProduct /></div>
+                            userdetails.isAdmin && <div>
+                                <Buttons></Buttons>
+                            </div>
                         }
+                         {
+                         loading?<Loader></Loader>:error?<Error></Error>:<div><SingleProduct /></div>
+                        }
+                      
                    </div>
             
-        :<div>please login</div>
+        :<Alert></Alert>
             }
         </div>
     );

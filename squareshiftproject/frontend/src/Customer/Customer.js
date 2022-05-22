@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Customer.css";
-
+import { useSelector } from 'react-redux';
+import Alert from '../Alert/Alert';
 const Customer = () => {
 
     const navigate = useNavigate()
@@ -20,8 +21,14 @@ const Customer = () => {
       sessionStorage.setItem("customer",JSON.stringify(data))
       navigate("/orders")
     }
-
+   
+    const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
     return (
+        <div>
+            {
+                userdetails?(
+                     
         <div className="sale-detail-page">
           <div className="sales-detail-container">
             <h2 className="sales-title">Customer Detail</h2>
@@ -115,15 +122,8 @@ const Customer = () => {
                     required
                   />
             </div>
-    </div>
-</div>
-              
-                
-              
-               
-               
-                
-              
+       </div>
+     </div>
               </div>
               <div className="sales-btn">
                 <button type="submit">Submit</button>
@@ -131,6 +131,12 @@ const Customer = () => {
             </form>
           </div>
         </div>
-      );
+                ):(
+                       <Alert></Alert>
+                )
+            }
+       </div>
+    );
+    
     };
 export default Customer

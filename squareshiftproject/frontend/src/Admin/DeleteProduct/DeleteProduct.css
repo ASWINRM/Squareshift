@@ -1,0 +1,19 @@
+.delete_product {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    background-color: #000000ad;
+}
+
+.delete_product_container {
+    width: 30%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    max-width: 1150px;
+}

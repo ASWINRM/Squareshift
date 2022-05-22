@@ -1,0 +1,24 @@
+.update_product {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    background-color: #000000ad;
+}
+
+.updateproduct_container {
+    width: 50%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    max-width: 1150px;
+}
+.delete_form select {
+        border: 1px solid #ddd;
+        outline:none;
+        padding: 10px;
+}

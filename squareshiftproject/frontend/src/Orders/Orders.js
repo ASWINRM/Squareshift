@@ -9,13 +9,15 @@ import { useNavigate } from 'react-router-dom';
 const Orders = () => {
 
     const [customer] = useState(JSON.parse(sessionStorage.getItem("customer")));
- const navigate = useNavigate()
+    const navigate = useNavigate()
     const cart = useSelector(state => state.cartreducer.cartitems)
     const totalPrice =
     cart.reduce((acc,curr) => {
          return acc + curr.price
     },0)
-
+    const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
+    
     const handleProceed = () => {
         swal("The Order Has been Successfully placed", "", "success", {
             closeOnClickOutside: false,
@@ -27,39 +29,42 @@ const Orders = () => {
 
     return (
         <div className="orderSummary">
-          <h2 className="page-heading">Order Summary</h2>
-          <h3 className="section-title">Customer order details</h3>
-          <div className="order-summary-boxes">
-            <div className="billing-details-box">
-              <div>
-                <span>Customer Name</span>
-                <p>
-                  : <span>{customer["name"]} </span>
-                </p>
-              </div>
-              <div>
-                <span>Mobile No</span>
-                <p>
-                  : <span>{customer["phone"]} </span>
-                </p>
-              </div>
-              <div>
-                <span>Email Id</span>
-                <p>
-                  : <span> {customer["email"]} </span>
-                </p>
-              </div>
-              <div>
-                <span>Delivery address </span>
-                <p>
-                  {" "}
-                  : <span>{customer.address} </span>{" "}
-                </p>
-              </div>
+            {
+                userdetails ? (
+                    <div>
+                    <h2 className="page-heading">Order Summary</h2>
+                    <h3 className="section-title">Customer order details</h3>
+                    <div className="order-summary-boxes">
+                        <div className="billing-details-box">
+                           <div>
+                              <span>Customer Name</span>
+                               <p>
+                               : <span>{customer["name"]} </span>
+                               </p>
+                             </div>
+                          <div>
+                     <span>Mobile No</span>
+                     <p>
+                       : <span>{customer["phone"]} </span>
+                      </p>
+                    </div>
+                  <div>
+                     <span>Email Id</span>
+                     <p>
+                       : <span> {customer["email"]} </span>
+                      </p>
+                 </div>
+                  <div>
+                    <span>Delivery address </span>
+                    <p>
+                     {" "}
+                     : <span>{customer.address} </span>{" "}
+                    </p>
+                  </div>
               
-            </div>
+                 </div>
           
-          </div>
+                </div>
           <div className="order-summary-table-title">
             <h3 className="section-title">List of products ordered by customer</h3>
             
@@ -83,8 +88,12 @@ const Orders = () => {
             </button>
             <p className="total-price">
               Order Total <span>&#x20B9; {totalPrice?.toFixed(2)}</span>
-            </p>
+                            </p>
+                            </div>
           </div>
+                ):(<div>please login</div>)
+            }
+          
           
         </div>
       );

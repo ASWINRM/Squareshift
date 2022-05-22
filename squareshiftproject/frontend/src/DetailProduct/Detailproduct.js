@@ -4,6 +4,7 @@ import { useDispatch ,useSelector} from 'react-redux';
 import Loader from '../componenets/Loader'
 import axios from 'axios';
 import "./detailproduct.css";
+import Alert from '../Alert/Alert';
 function Detailproduct({ match }) {
     
     const id = window.location.pathname.split('/')[2];
@@ -31,10 +32,16 @@ function Detailproduct({ match }) {
     }
 
     const cartlist = useSelector(state => state.cartreducer)
-    const {cartitems}=cartlist
+    const { cartitems } = cartlist
+    
+    const userinfo = useSelector((state) => state.userloginreducer)
+    const { userdetails } = userinfo
     return (
         <div>
-            <Header></Header>
+            {
+                userdetails ? (
+                    <div>
+                         <Header></Header>
             
             {
                 loading && <Loader></Loader>
@@ -79,6 +86,10 @@ function Detailproduct({ match }) {
             
             </div>
                   }
+                    </div>
+                ):(<Alert></Alert>)
+            }
+           
                
             </div>
     );
